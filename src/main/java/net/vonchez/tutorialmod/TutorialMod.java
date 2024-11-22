@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.vonchez.tutorialmod.items.ModCreativeModeTab;
 import net.vonchez.tutorialmod.items.ModItems;
 import org.slf4j.Logger;
 import terrablender.api.SurfaceRuleManager;
@@ -33,6 +34,7 @@ public class TutorialMod {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
         ModItems.register(modEventBus);
+        ModCreativeModeTab.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
@@ -44,6 +46,7 @@ public class TutorialMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
            event.accept(ModItems.SAPPHIRE);
+           event.accept(ModItems.RAW_SAPPHIRE);
        }
     }
 
