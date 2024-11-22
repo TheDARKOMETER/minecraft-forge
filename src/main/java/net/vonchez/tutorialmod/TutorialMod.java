@@ -19,6 +19,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.vonchez.tutorialmod.items.ModItems;
 import org.slf4j.Logger;
 import terrablender.api.SurfaceRuleManager;
 
@@ -31,7 +32,7 @@ public class TutorialMod {
     public TutorialMod() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-
+        ModItems.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
     }
@@ -41,9 +42,9 @@ public class TutorialMod {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-
-        }
+       if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+           event.accept(ModItems.SAPPHIRE);
+       }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
